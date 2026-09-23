@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Frontend & Design Toolkit — Rhythma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #21201c;
+    --ink-soft: #55524a;
+    --paper: #f7f4ee;
+    --paper-raised: #ffffff;
+    --line: #ddd7c9;
+    --accent: #3d6b63;
+    --accent-soft: #e4ece9;
+    --gold: #a97a2f;
+    --gold-soft: #f2e7d2;
+    --radius: 3px;
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+    box-sizing: border-box;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ece8de;
+      --ink-soft: #b6b1a2;
+      --paper: #161511;
+      --paper-raised: #1d1c17;
+      --line: #35332a;
+      --accent: #7cb3a5;
+      --accent-soft: #223330;
+      --gold: #d3a75a;
+      --gold-soft: #2c2618;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ece8de;
+    --ink-soft: #b6b1a2;
+    --paper: #161511;
+    --paper-raised: #1d1c17;
+    --line: #35332a;
+    --accent: #7cb3a5;
+    --accent-soft: #223330;
+    --gold: #d3a75a;
+    --gold-soft: #2c2618;
+  }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  body {
+    margin: 0;
+    font-family: "Inter", -apple-system, sans-serif;
+    font-size: 16.5px;
+    line-height: 1.65;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4.5rem 1.75rem 6rem;
+  }
+
+  /* ---------- Header ---------- */
+  .kicker {
+    font-family: "Inter", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    margin: 0 0 0.9rem;
+  }
+
+  h1 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5vw, 2.85rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 1rem;
+    max-width: 20ch;
+  }
+
+  .deck {
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin: 0 0 2.6rem;
+  }
+
+  .byline {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+  }
+  .byline .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--line); }
+
+  /* ---------- Section rhythm ---------- */
+  section { margin-top: 3.6rem; }
+
+  h2 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: -0.005em;
+    margin: 0 0 1.3rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  p { margin: 0 0 1.1rem; max-width: 68ch; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ---------- Tool cards ---------- */
+  .tool {
+    padding: 1.9rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .tool:last-child { border-bottom: none; padding-bottom: 0; }
+  .tool:first-of-type { padding-top: 0; }
+
+  .tool-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.35rem;
+  }
+
+  .tool-name {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 1.28rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .tool-role {
+    font-size: 0.86rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .tool-body { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 0.9rem; }
+  @media (min-width: 620px) {
+    .tool-body { grid-template-columns: 1fr 1fr; }
+  }
+
+  .tool-col h4 {
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-transform: none;
+    color: var(--ink-soft);
+    margin: 0 0 0.55rem;
+  }
+  .tool-col ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+  .tool-col li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+  .tool-col li:last-child { margin-bottom: 0; }
+
+  .best-use {
+    margin-top: 1rem;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 0.7rem 0.95rem;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 0.94rem;
+  }
+  .best-use strong { font-weight: 600; }
+
+  /* ---------- Matrix table ---------- */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 0.93rem; }
+  thead th {
+    text-align: left;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    background: var(--paper-raised);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  tbody td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td:first-child { font-weight: 500; white-space: nowrap; }
+
+  /* ---------- Workflow ---------- */
+  .workflow {
+    display: flex;
+    flex-direction: column;
+  }
+  .wf-step {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    gap: 1.1rem;
+    position: relative;
+    padding-bottom: 2.1rem;
+  }
+  .wf-step:last-child { padding-bottom: 0; }
+  .wf-num {
+    width: 2.6rem; height: 2.6rem;
+    border-radius: 50%;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Source Serif 4", serif;
+    font-weight: 600;
+    color: var(--accent);
+    z-index: 1;
+  }
+  .wf-step:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 1.3rem;
+    top: 2.6rem;
+    bottom: -0.1rem;
+    width: 1px;
+    background: var(--line);
+  }
+  .wf-title { font-weight: 600; margin: 0.35rem 0 0.35rem; font-size: 1.03rem; }
+  .wf-text { color: var(--ink-soft); font-size: 0.96rem; margin: 0; }
+  .wf-example {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+    padding: 0.65rem 0.85rem;
+    background: var(--gold-soft);
+    border-radius: var(--radius);
+    color: var(--ink);
+  }
+
+  /* ---------- Chain diagram ---------- */
+  .chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 0 0.5rem;
+    padding: 1.4rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .chain-node {
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--paper);
+  }
+  .chain-node.emph { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .chain-arrow { color: var(--ink-soft); font-size: 0.9rem; }
+
+  .closing-note {
+    margin-top: 3.2rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.96rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    .page { padding: 3rem 1.2rem 4.5rem; }
+    .tool-head { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">RHYTHMA — LANDING PAGE</p>
+  <h1>Frontend &amp; Design Toolkit</h1>
+  <p class="deck">A working reference for which tool to reach for at each stage of building the Rhythma landing page — from a loose idea to shipped frontend code.</p>
+  <div class="byline">
+    <span>Design &amp; build notes</span>
+    <span class="dot"></span>
+    <span>Ishita</span>
+  </div>
+
+  <section>
+    <h2>Why more than one tool</h2>
+    <p>No single tool covers ideation, visual design, and production code equally well. Each one below is strong at a different stage — the goal isn't to pick a favorite, but to know which stage you're in and reach for the right one.</p>
+  </section>
+
+  <section>
+    <h2>The tools</h2>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">ChatGPT</h3>
+        <span class="tool-role">Ideas · visuals · content</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-col">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Turns a loose prompt into a visual reference, fast</li>
+            <li>Good for sections you're unsure how to lay out</li>
+            <li>Handles content too — headings, copy, feature text</li>
+            <li>Can take in repo context, PPTs, and docs to understand the project first</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Limitation</h4>
+          <ul>
+            <li>Not a code-generation tool like v0 or Lovable</li>
+            <li>Whatever it produces still needs to be implemented separately</li>
+          </ul>
+        </div>
+      </div>
+      <div class="best-use"><strong>Reach for it when:</strong> you have an idea but don't yet know how the section should look or what it should say.</div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">Claude</h3>
+        <span class="tool-role">Design → frontend code</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-col">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Generates complete frontend code from a detailed prompt</li>
+            <li>Works well once you already have a clear reference</li>
+            <li>Can read and modify existing code, and explain it</li>
+            <li>Handles repo/codebase context</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Limitation</h4>
+          <ul>
+            <li>Usage limits get restrictive across many rounds of iteration</li>
+            <li>Better suited to a clear direction than open-ended exploration</li>
+          </ul>
+        </div>
+      </div>
+      <div class="best-use"><strong>Reach for it when:</strong> the design or reference is settled and it's time to implement it.</div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">v0</h3>
+        <span class="tool-role">Fast modern UI + code</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-col">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Prompt → UI → code, quickly</li>
+            <li>Good for generating individual landing-page sections</li>
+            <li>Accepts reference images or designs</li>
+            <li>Fits GitHub-based workflows</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Limitation</h4>
+          <ul>
+            <li>First-pass output usually needs refinement</li>
+            <li>Generated code should be reviewed before it goes into the project</li>
+          </ul>
+        </div>
+      </div>
+      <div class="best-use"><strong>Reach for it when:</strong> you already know what a section should look like and just need the frontend built.</div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">Lovable</h3>
+        <span class="tool-role">Idea → working prototype</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-col">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Generates UI and code together</li>
+            <li>Can build larger portions of a site from prompts</li>
+            <li>Good for moving from idea to working prototype quickly</li>
+            <li>GitHub integration suits team workflows</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Limitation</h4>
+          <ul>
+            <li>Can generate more than what's actually needed</li>
+            <li>Output often needs cleanup before it's production-ready</li>
+          </ul>
+        </div>
+      </div>
+      <div class="best-use"><strong>Reach for it when:</strong> you want to go from idea to a working prototype without building every part by hand.</div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">Figma</h3>
+        <span class="tool-role">Design system + collaboration</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-col">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Best for the overall visual system — type, spacing, components, color</li>
+            <li>Easy for the team to review and collaborate on designs</li>
+            <li>Keeps consistency across sections</li>
+            <li>Figma Make can generate interactive, code-backed prototypes</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Limitation</h4>
+          <ul>
+            <li>Some AI features depend on plan/seat</li>
+            <li>Need to decide: is Figma or the codebase the source of truth?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="best-use"><strong>Reach for it when:</strong> you're building the design system, or the team needs to review visuals together.</div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">Canva</h3>
+        <span class="tool-role">Visual assets + content</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-col">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Fast for supporting visuals — illustrations, banners, icons</li>
+            <li>Very easy to use, large template library</li>
+            <li>Canva AI generates and edits designs from prompts</li>
+            <li>Canva Code extends it to interactive, website-like experiences</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Limitation</h4>
+          <ul>
+            <li>Not built for maintaining a production React/frontend codebase</li>
+            <li>v0, Claude, or Lovable are better fits for that layer</li>
+          </ul>
+        </div>
+      </div>
+      <div class="best-use"><strong>Reach for it when:</strong> you need graphics or supporting visual content, not shippable code.</div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">Stitch (Google)</h3>
+        <span class="tool-role">AI UI design + rapid iteration</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-col">
+          <h4>Strengths</h4>
+          <ul>
+            <li>High-fidelity UI from prompts, images, text, or code</li>
+            <li>Conversational iteration instead of rebuilding from scratch</li>
+            <li>Can produce interactive prototypes and export toward dev tools</li>
+            <li>Pairs well with Antigravity for the design → development handoff</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Limitation</h4>
+          <ul>
+            <li>Primarily a design/prototyping layer</li>
+            <li>Production code still needs review and maintenance afterward</li>
+          </ul>
+        </div>
+      </div>
+      <div class="best-use"><strong>Reach for it when:</strong> exploring several UI directions quickly before handing off to development.</div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">Antigravity</h3>
+        <span class="tool-role">Iterative development</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-col">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Good for working on an existing codebase through prompts</li>
+            <li>Keep asking for changes instead of editing everything by hand</li>
+            <li>Suited to smaller refinements on a real project</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Limitation</h4>
+          <ul>
+            <li>Output quality depends on how clearly the change is described</li>
+            <li>Changes should be reviewed before merging</li>
+          </ul>
+        </div>
+      </div>
+      <div class="best-use"><strong>Reach for it when:</strong> the design is done and you're making small, targeted changes to a live project.</div>
+    </div>
+
+    <div class="tool">
+      <div class="tool-head">
+        <h3 class="tool-name">Replit AI</h3>
+        <span class="tool-role">Build + host + deploy, in one place</span>
+      </div>
+      <div class="tool-body">
+        <div class="tool-col">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Goes past code generation — builds, hosts, and deploys from the same workspace</li>
+            <li>Good for full-stack scaffolding, not just frontend, if the landing page ever needs a backend touchpoint (waitlist, email capture)</li>
+            <li>One-click deploy gives a live URL immediately, no separate hosting step</li>
+            <li>Iterates conversationally on an existing project, similar to Antigravity</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Limitation</h4>
+          <ul>
+            <li>Design taste is a notch behind v0 or Lovable for polished, distinctive UI</li>
+            <li>Optimizes for a working app over a considered landing page — less suited to the design-exploration phase</li>
+          </ul>
+        </div>
+      </div>
+      <div class="best-use"><strong>Reach for it when:</strong> the design direction is already locked and it's time to build and deploy.</div>
+    </div>
+
+  </section>
+
+  <section>
+    <h2>Which tool, for what</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Requirement</th><th>Tools to try</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Generate ideas</td><td>ChatGPT, Stitch</td></tr>
+          <tr><td>Generate visual references</td><td>ChatGPT, Canva, Stitch</td></tr>
+          <tr><td>Landing-page content</td><td>ChatGPT, Claude</td></tr>
+          <tr><td>UI/UX design</td><td>Figma, Stitch</td></tr>
+          <tr><td>Generate frontend code</td><td>v0, Claude, Lovable</td></tr>
+          <tr><td>Complete website/prototype</td><td>Lovable, v0, Figma Make</td></tr>
+          <tr><td>Design + code together</td><td>Figma Make, Stitch, v0</td></tr>
+          <tr><td>Visual assets/graphics</td><td>Canva, ChatGPT</td></tr>
+          <tr><td>Repeated design iterations</td><td>ChatGPT, Stitch, Figma</td></tr>
+          <tr><td>Modify existing code</td><td>Claude, Antigravity, Replit AI</td></tr>
+          <tr><td>GitHub/development workflow</td><td>Lovable, v0, dev tools</td></tr>
+          <tr><td>Build, host &amp; deploy</td><td>Replit AI</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>A personal workflow, as one example</h2>
+    <p>This is one way through the tools above — not the only way. The point is having a repeatable path from a loose idea to a section that's actually clean and ready to ship.</p>
+
+    <div class="workflow">
+      <div class="wf-step">
+        <div class="wf-num">1</div>
+        <div>
+          <p class="wf-title">Give ChatGPT the full project context first</p>
+          <p class="wf-text">Repo, PPTs, docs, existing landing-page info, target users, and any reference images — before asking for anything, so suggestions are grounded in the actual project rather than generic.</p>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-num">2</div>
+        <div>
+          <p class="wf-title">Decide the content before the design</p>
+          <p class="wf-text">Ask what the next section should communicate before asking what it should look like. Once the message is clear — for example, "Rhythma supports multiple Indian languages and has an AI assistant" — work out the structure: what's on the left, what's on the right, whether there's a phone mockup, where the assistant appears, how much text is actually needed.</p>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-num">3</div>
+        <div>
+          <p class="wf-title">Generate the visual</p>
+          <p class="wf-text">Only once the structure feels right. The goal throughout: don't let the section get congested — keep whitespace, and make the main feature immediately understandable.</p>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-num">4</div>
+        <div>
+          <p class="wf-title">Run the same idea through multiple tools</p>
+          <p class="wf-text">Take the final prompt from ChatGPT and try it in v0, Lovable, Figma, and Stitch. Compare outputs — the layout from one, the animation idea from another — and combine the strongest parts into one improved prompt, rather than treating any single tool's first output as final.</p>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-num">5</div>
+        <div>
+          <p class="wf-title">Match the tool to the size of the change</p>
+          <p class="wf-text">Major changes go back to the design/prompting stage. Small ones — spacing, font size, animation speed, nudging an element — are faster to make directly with a development tool like Antigravity.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chain">
+      <span class="chain-node">Project context</span><span class="chain-arrow">→</span>
+      <span class="chain-node emph">ChatGPT</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Visual + prompt</span><span class="chain-arrow">→</span>
+      <span class="chain-node">v0 / Lovable / Figma / Stitch</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Compare &amp; combine</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Final design</span><span class="chain-arrow">→</span>
+      <span class="chain-node emph">Claude / Antigravity</span>
+    </div>
+
+    <p class="closing-note">This is just one workflow — everyone can experiment with their own process. The underlying idea holds regardless of which tools you pick: try more than one, compare, and keep the best of each.</p>
+  </section>
+
+  <footer>Rhythma — frontend &amp; design reference</footer>
+
+</div>
+</body>
+</html>
